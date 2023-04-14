@@ -44,7 +44,7 @@ build-options: &compat-i386-build-options
   libdir: /app/lib32
 
 modules:
-  - shared-modules/SDL/SDL-1.2.15.json
+  - shared-modules/SDL/sdl12-compat.json
 
   - name: zsnes
     buildsystem: simple
