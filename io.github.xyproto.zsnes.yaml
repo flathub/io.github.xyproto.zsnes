@@ -61,8 +61,8 @@ modules:
       - install -Dm644 io.github.xyproto.zsnes.metainfo.xml -t $FLATPAK_DEST/share/metainfo
     sources:
       - type: archive
-        url: https://github.com/xyproto/zsnes/archive/refs/tags/2.0.10.tar.gz
-        sha256: 18d503e5839dfdc74d4c889b824757596bbe27b8f97ca148ceb2537e420848a5
+        url: https://github.com/xyproto/zsnes/archive/refs/tags/2.0.12.tar.gz
+        sha256: 64c520577d2b4f90f499a54b29c238ef8b6d9f2353050571a33ad0cf1a304055
       - type: patch
         path: xdg-dir.patch
       - type: inline
