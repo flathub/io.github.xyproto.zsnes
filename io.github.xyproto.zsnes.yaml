@@ -53,11 +53,8 @@ modules:
       - mkdir -p /app/lib/i386-linux-gnu
       - mkdir -p /app/lib/debug/lib/i386-linux-gnu
       - mkdir -p /app/lib/i386-linux-gnu/GL
-      - install -Dm755 zsnes -t $FLATPAK_DEST/bin
       - install -Dm644 ld.so.conf -t $FLATPAK_DEST/etc
-      - install -Dm644 io.github.xyproto.zsnes.png -t $FLATPAK_DEST/share/icons/hicolor/128x128/apps
-      - install -Dm644 linux/zsnes.desktop $FLATPAK_DEST/share/applications/$FLATPAK_ID.desktop
-      - desktop-file-edit --set-icon=$FLATPAK_ID --set-key=Exec --set-value="zsnes %f" --add-mime-type=application/vnd.nintendo.snes.rom --add-mime-type=application/x-snes-rom $FLATPAK_DEST/share/applications/$FLATPAK_ID.desktop
+      - make PREFIX=$FLATPAK_DEST install
       - install -Dm644 io.github.xyproto.zsnes.metainfo.xml -t $FLATPAK_DEST/share/metainfo
     sources:
       - type: archive
@@ -70,7 +67,5 @@ modules:
         contents: |
           /app/lib32
           /app/lib/i386-linux-gnu
-      - type: file
-        path: io.github.xyproto.zsnes.png
       - type: file
         path: io.github.xyproto.zsnes.metainfo.xml
