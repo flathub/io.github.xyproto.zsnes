@@ -1,14 +1,15 @@
 id: io.github.xyproto.zsnes
 runtime: org.freedesktop.Platform
-runtime-version: '24.08'
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 command: zsnes
 finish-args:
   - --share=ipc
   - --device=all
-  - --socket=x11
+  - --socket=wayland
+  - --socket=fallback-x11
   - --allow=multiarch
-  - --socket=pulseaudio
+  - --filesystem=xdg-run/pipewire-0
   - --filesystem=host:rw
 
 sdk-extensions:
@@ -18,12 +19,12 @@ sdk-extensions:
 add-extensions:
   org.freedesktop.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: '24.08'
+    version: '25.08'
 
   org.freedesktop.Platform.GL32:
     directory: lib/i386-linux-gnu/GL
     version: '1.4'
-    versions: 24.08;1.4
+    versions: 25.08;1.4
     subdirectories: true
     no-autodownload: true
     autodelete: false
@@ -38,14 +39,10 @@ build-options: &compat-i386-build-options
   prepend-path: /usr/lib/sdk/toolchain-i386/bin
   env:
     CC: i686-unknown-linux-gnu-gcc
-    CXX: i686-unknown-linux-gnu-g++
     CFLAGS: ''
-    CXXFLAGS: ''
   libdir: /app/lib32
 
 modules:
-  - shared-modules/SDL/sdl12-compat.json
-
   - name: zsnes
     buildsystem: simple
     build-commands:
@@ -58,10 +55,8 @@ modules:
       - install -Dm644 io.github.xyproto.zsnes.metainfo.xml -t $FLATPAK_DEST/share/metainfo
     sources:
       - type: archive
-        url: https://github.com/xyproto/zsnes/archive/refs/tags/2.0.12.tar.gz
-        sha256: 64c520577d2b4f90f499a54b29c238ef8b6d9f2353050571a33ad0cf1a304055
-      - type: patch
-        path: xdg-dir.patch
+        url: https://github.com/xyproto/zsnes/archive/refs/tags/2.2.2.tar.gz
+        sha256: 1b92bdc37a33e37abc896721f4c5b0ed5df6b90326d6b40b44bfbea2eeb1fd2f
       - type: inline
         dest-filename: ld.so.conf
         contents: |
